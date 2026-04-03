@@ -1,153 +1,39 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const paths = document.querySelectorAll('.Cutout path');
-    const infoCard = document.getElementById('infoCard');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalButton = document.getElementById('navigateButton');
-    const closeCard = document.getElementById('closeCard');
-    const detailsEl = document.getElementById('details');
+const paths = document.querySelectorAll('.Cutout path');
 
-    let selectedPath = null;
-    let currentLink = '';
+paths.forEach(path => {
+    const link = path.getAttribute('data-link');
 
-    function updateDetailsFromName(name) {
-        if (!detailsEl) return;
+    if (link) {
+        path.addEventListener('click', () => {
 
-        const match = name.match(/\d+/);
-        const floorNum = match ? parseInt(match[0], 10) : null;
+            // optional feedback
+            // path.style.opacity = "0.6";
 
-        if (!floorNum) {
-            detailsEl.innerHTML = `<div>No floor data</div>`;
-            return;
-        }
-
-        /* -------- QUERY 1: FLOORS 1–10 -------- */
-        if (floorNum >= 1 && floorNum <= 32) {
-            detailsEl.innerHTML = `
-            <div><strong>Total Units:</strong>2</div>
-            <div><strong>Type:</strong>4 BHK</div>
-            <div><strong>Area:</strong>4600 Sq.ft.</div>
-        `;
-        }
-
-        /* -------- QUERY 2: FLOORS 11–33 -------- */
-        else {
-            detailsEl.innerHTML = `
-            <div><strong>Total Units:</strong>1</div>
-            <div><strong>Type:</strong>Penthouse</div>
-            <div><strong>Area:</strong>15000 Sq.ft.</div>
-        `;
-        }
-    }
-
-
-
-
-    function setExploreState(hasLink) {
-        if (!modalButton) return;
-        modalButton.disabled = !hasLink;
-        modalButton.style.opacity = hasLink ? '1' : '0.6';
-        modalButton.style.pointerEvents = hasLink ? 'auto' : 'none';
-        modalButton.title = hasLink ? '' : 'No page linked for this floor';
-    }
-
-    // Path click -> open card, set title, details, link
-    paths.forEach(path => {
-        path.addEventListener('click', (e) => {
-            e.stopPropagation();
-
-            // Deselect previous
-            if (selectedPath && selectedPath !== path) {
-                selectedPath.classList.remove('selected');
-            }
-
-            // Toggle current
-            if (path.classList.contains('selected')) {
-                path.classList.remove('selected');
-                infoCard.style.display = 'none';
-                selectedPath = null;
-                currentLink = '';
-                modalTitle.textContent = '~';
-                setExploreState(false);
-            } else {
-                path.classList.add('selected');
-                selectedPath = path;
-
-                // Title
-                const name = path.getAttribute('data-name') || path.id || 'Info';
-                modalTitle.textContent = name;
-
-                // Details
-                updateDetailsFromName(name);
-
-                // Link (relative, strip leading slash if any)
-                const link = path.getAttribute('data-link') || '';
-                currentLink = link.replace(/^\//, '');
-                setExploreState(!!currentLink);
-                // ✅ Add these lines here
-                sessionStorage.setItem('lastFloorName', name);
-                sessionStorage.setItem('lastFloorLink', currentLink);
-
-                // Show modal
-                infoCard.style.display = 'flex';
-            }
-        });
-    });
-
-    // Explore -> navigate
-    if (modalButton) {
-        modalButton.addEventListener('click', () => {
-            if (currentLink) {
-                window.location.href = currentLink;
-            }
+            setTimeout(() => {
+                window.location.href = link;
+            }, 800);
         });
     }
-
-    // Close button -> hide & reset
-    if (closeCard) {
-        closeCard.addEventListener('click', () => {
-            infoCard.style.display = 'none';
-            if (selectedPath) {
-                selectedPath.classList.remove('selected');
-                selectedPath = null;
-            }
-            currentLink = '';
-            modalTitle.textContent = '~';
-            setExploreState(false);
-        });
-    }
-
-    // Click outside -> hide & reset
-    document.addEventListener('click', (e) => {
-        const isPath = e.target.closest('path');
-        const isModal = e.target.closest('.info-content');
-        if (!isPath && !isModal) {
-            infoCard.style.display = 'none';
-            if (selectedPath) {
-                selectedPath.classList.remove('selected');
-                selectedPath = null;
-            }
-            currentLink = '';
-            modalTitle.textContent = '~';
-            setExploreState(false);
-        }
-    });
 });
-document.addEventListener("DOMContentLoaded", () => {
 
-    if (!sessionStorage.getItem("floorHintShown")) {
+paths.forEach(path => {
+    const link = path.getAttribute('data-link');
 
-        const paths = document.querySelectorAll(".Cutout path");
+    if (link) {
+        path.addEventListener('click', () => {
 
-        paths.forEach(p => p.classList.add("svg-hint"));
+            // remove all previous
+            paths.forEach(p => p.classList.remove('selected'));
 
-        setTimeout(() => {
-            paths.forEach(p => {
-                p.classList.add("done");
-                p.classList.remove("svg-hint");
-            });
-        }, 2600);
+            // add selected
+            path.classList.add('selected');
 
-        sessionStorage.setItem("floorHintShown", "true");
+            // 🔒 disable hover effect after click
+            paths.forEach(p => p.style.pointerEvents = "none");
+
+            setTimeout(() => {
+                window.location.href = link;
+            }, 800);
+        });
     }
-
 });

@@ -499,7 +499,7 @@ body {
     position: fixed;
     background-color: transparent;
     /* No blocking layer */
-    display: none;
+    display: flex;
     z-index: 8999;
     pointer-events: none;
     /* ❗️ This makes whole container non-interactive except children */
@@ -840,6 +840,7 @@ body {
 .info-content {
     top: 120px;
     left: 60px;
+    text-align: center;
     /* background-color: #1e1e1e; */
     /* background-color: #0e1638; */
     background-color: #080e24;
@@ -903,7 +904,7 @@ body {
 .info-details {
     /* background: rgba(255, 255, 255, 0.05); */
     background: rgba(255, 255, 255, 0.5);
-    padding: 12px 14px;
+    padding: 6px 14px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     font-size: 15px;
