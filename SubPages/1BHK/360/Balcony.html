@@ -2,16 +2,138 @@
 <html lang="en">
 
 <head>
+  <style>
+    #compass {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      z-index: 9999;
+    }
 
- 
+    /* ✨ Outer glass */
+    .compass-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+
+      border: 1px solid rgba(255, 255, 255, 0.15);
+
+      box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(255, 255, 255, 0.05);
+    }
+
+    /* subtle inner ring */
+    .compass-circle::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    /* directions */
+    .dir {
+      position: absolute;
+      color: rgba(22, 4, 4, 0.8);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .north {
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ff4d4d;
+    }
+
+    .south {
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .east {
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .west {
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* 🔥 premium needle */
+    .needle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 15px;
+      transform: translate(-50%, -100%);
+      transform-origin: bottom center;
+
+      background: linear-gradient(to top, #ffffff, #ff4d4d);
+      border-radius: 2px;
+    }
+
+    /* needle tip */
+    .needle::after {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid #ff4d4d;
+    }
+
+    /* center dot */
+    .center-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .needle {
+      transform-origin: bottom center;
+    }
+  </style>
+
+
   <title>London Square</title>
   <link rel="stylesheet" href="./../../../wbn05d6fbh.css" />
   <link rel="stylesheet" href="./../../../JS/CSS/yp0wlolwzw.css">
 </head>
 
-<body>
+<Body> <button id="upperBalconyBtn">Upper Balcony</button>
+  <div id="compass">
+    <div class="compass-circle">
+      <div class="needle"></div>
 
+      <span class="dir north">N</span>
+      <span class="dir east">E</span>
+      <span class="dir south">S</span>
+      <span class="dir west">W</span>
 
+      <div class="center-dot"></div>
+    </div>
+  </div>
   <!-- <button id="waFab" class="wa-fab" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
 
     <svg class="wa-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -52,6 +174,17 @@
   <script src="https://cdn.jsdelivr.net/npm/panolens@0.12.0/build/panolens.min.js"></script>
 
   <!-- <script>const panoramaImage = new PANOLENS.ImagePanorama("../../../images/Apparments/1BHK/360/Dinning.jpg"); -->
+    <script>
+    function createArrowSVG() {
+      const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <polygon points="50,20 75,65 50,55 25,65" fill="white"/>
+  </svg>
+  `;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+  </script>
+
   <script>
     // 1) Define both images
     const LOW_SRC = "./../../../images/Thumbnail/Apartments/1BHK/360/Balcony.webp";
@@ -140,8 +273,10 @@
 
 
     // 🔴 Hotspot 1
-    const spot1 = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
-    setFromAngles(spot1, -10, -10); 
+       const ARROW_ICON = createArrowSVG();
+
+    const spot1 = new PANOLENS.Infospot(350, ARROW_ICON);
+    setFromAngles(spot1, -10, -10);
     spot1.addHoverText("Bedroom");
     spot1.addEventListener('click', () => {
       // keep visible for a moment
@@ -189,6 +324,52 @@
   <script src="./../../../JS/5guwuzaijb.js"></script>
   <script src="./../../../JS/ky0nwmerow.js"></script>
   <script src="./../../../JS/ekdxgbwr0o.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      const needle = document.querySelector(".needle");
+
+      let currentAngle = 0;
+      let fixedNorth = null;
+      let roomOffset = 90; // 👈 NEW
+
+      function resetNorth() {
+        const dir = new THREE.Vector3();
+        viewer.camera.getWorldDirection(dir);
+        fixedNorth = Math.atan2(dir.x, dir.z) * (180 / Math.PI);
+      }
+
+      function updateCompass() {
+        const dir = new THREE.Vector3();
+        viewer.camera.getWorldDirection(dir);
+
+        let angle = Math.atan2(dir.x, dir.z) * (180 / Math.PI);
+
+        if (fixedNorth === null) {
+          resetNorth();
+        }
+
+        // 👇 APPLY ROOM OFFSET
+        let targetAngle = angle - fixedNorth + roomOffset;
+
+        let diff = targetAngle - currentAngle;
+        diff = ((diff + 180) % 360) - 180;
+
+        currentAngle += diff * 0.08;
+
+        needle.style.transform =
+          `translate(-50%, -100%) rotate(${currentAngle}deg)`;
+
+        requestAnimationFrame(updateCompass);
+      }
+
+      updateCompass();
+
+      // 👇 expose for manual control
+      window.setRoomDirection = (deg) => {
+        roomOffset = deg;
+      };
+    });
+  </script>
 </body>
 
 </html>

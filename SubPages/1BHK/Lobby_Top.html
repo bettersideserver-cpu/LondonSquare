@@ -11,6 +11,92 @@
             user-select: none;
         }
 
+        .content-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .content-wrapper img {
+            display: block;
+            height: 100vh;
+            width: auto;
+        }
+
+        .Cutout {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .Cutout svg {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .Cutout path {
+            pointer-events: auto;
+        }
+
+        .Cutout {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(var(--scene-scale, 1));
+            width: 90vmin;
+            aspect-ratio: 3840 / 5830;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 1;
+        }
+
+
+        .Cutout svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* 🔥 important */
+        }
+
+        .Cutout path {
+            fill: transparent;
+            pointer-events: auto;
+            cursor: pointer;
+            stroke: transparent;
+            stroke-width: 8px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            transition: stroke 0.3s ease, fill 0.3s ease;
+        }
+
+
+        .Cutout path:hover {
+            /* stroke: rgb(141, 127, 205);
+    fill: rgba(0, 0, 255, 0.2); */
+            /* stroke: #004771; */
+            stroke: #a3845d;
+            /* fill: rgba(0, 71, 113, 0.4); */
+            fill: rgba(186, 167, 145, 0.4);
+        }
+
+
+        .Cutout path.selected {
+            /* stroke: rgb(255, 140, 0); */
+            /* stroke: rgb(233, 182, 59); */
+            /* stroke: #00629b; */
+            stroke: #8d7252;
+            /* Orange */
+            /* fill: rgba(0, 71, 113, 0.5); */
+            fill: rgba(163, 146, 128, 0.5);
+        }
+
         .lobby-top {
             width: 100vw;
             height: 100vh;
@@ -63,7 +149,7 @@
         }
 
 
-        .button1 {
+        /* .button1 {
             top: 70%;
             left: 64%;
         }
@@ -75,13 +161,13 @@
 
         .button3 {
             top: 38%;
-            left: 33%;
+            left: 3%;
         }
 
         .button4 {
             top: 59%;
             left: 65%;
-        }
+        } */
 
 
         .touch-button:hover {
@@ -256,6 +342,9 @@
 
 <body>
 
+    <div id="floorTip" class="floortip"></div>
+
+
 
     <!-- Button (use JS click handler so message is built fresh on click) -->
     <button id="waFab" class="wa-fab" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
@@ -277,18 +366,159 @@
             <img id="mainImage" src="./../../images/Thumbnail/Apartments/1BHK/Lobby_Top.webp"
                 data-full="./../../images/Apartments/1BHK/Lobby_Top.jpg" alt="Home" fetchpriority="high"
                 decoding="async" width="3840" height="5830" class="blur-up" />
-            <button class="touch-button button1" onclick="window.location.href='360/Bedroom.html'">
+            <div class="Cutout">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 4096 4096">
+                    <!-- <path id="Room" id="Apparments" data-link="360/Balcony/Balcony_10.html"
+                        d="M3051 1134.89v315.55l-94.14-.05-72.19-.05v-315.45z" class="st0" />
+                    <path id="Room 01" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1128.22 1134.89v314.93l-21.19-.01-92.47-.03-153.34-314.89z" class="st0" />
+                    <path id="Room 02" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1263.78 1134.89v314.97h-13.88l-121.68-.04v-314.93z" class="st0" />
+                    <path id="Room 03" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1396.67 1134.89v315.01h-18.87l-114.02-.04v-314.97z" class="st0" />
+                    <path id="Room 04" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1532.67 1134.89v315.06l-15.28-.01-120.72-.04v-315.01z" class="st0" />
+                    <path id="Room 05" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M1668.67 1134.89v315.1l-56.46-.02-79.54-.02v-315.06z" class="st0" />
+                    <path id="Room 06" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M1806 1134.89v315.15l-45.33-.02-92-.03v-315.1z" class="st0" />
+                    <path id="Room 07" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M1945.56 1134.89v315.19l-28.28-.01-111.28-.03v-315.15z" class="st0" />
+                    <path id="Room 08" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2081.11 1134.89v315.24l-44.62-.02-90.93-.03v-315.19z" class="st0" />
+                    <path id="Room 09" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2214.89 1134.89v315.28l-16.14-.01-117.64-.03v-315.24z" class="st0" />
+                    <path id="Room 10" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2346 1134.89v315.32h-17.19l-113.92-.04v-315.28z" class="st0" />
+                    <path id="Room 11" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2489.56 1134.89v315.37l-36.51-.01-107.05-.04v-315.32z" class="st0" />
+                    <path id="Room 12" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2616.22 1134.89v315.41l-18.89-.01-107.77-.03v-315.37z" class="st0" />
+                    <path id="Room 13" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2757.11 1134.89v315.45l-35.2-.01-105.69-.03v-315.41z" class="st0" />
+                    <path id="Room 14" id="Apparments" data-link="360/Balcony/Balcony_08.html"
+                        d="M2884.67 1134.89v315.5l-127.56-.05v-315.45z" class="st0" />
+                    <path id="Room 15" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1258.17 1504.89v253.33h-79.73l-118.16-253.33z" class="st0" />
+                    <path id="CommonArea" id="Apparments" data-link="360/CommonArea_01.html"
+                        d="M3110.78 1758.22h-224.17v-253.33h224.17s-1.7 253.33 0 253.33" class="st0" />
+                    <path id="Room 16" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1258.17 1504.89h134.66v253.33h-134.66z" class="st0" />
+                    <path id="Room 17" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1392.83 1504.89h139.11v253.33h-139.11z" class="st0" />
+                    <path id="Room 18" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1531.94 1504.89h135.56v253.33h-135.56z" class="st0" />
+                    <path id="Room 19" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M1939.5 1504.89h140.89v253.33H1939.5z" class="st0" />
+                    <path id="Room 20" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M2080.39 1504.89h134.22v253.33h-134.22z" class="st0" />
+                    <path id="Room 21" id="Apparments" data-link="360/Balcony/Balcony_02.html"
+                        d="M2214.61 1504.89h140v253.33h-140z" class="st0" />
+                    <path id="Room 22" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2354.61 1504.89h131.56v253.33h-131.56z" class="st0" />
+                    <path id="Room 23" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2486.17 1504.89h134.22v253.33h-134.22z" class="st0" />
+                    <path id="Room 24" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2620.39 1504.89h138.22v253.33h-138.22z" class="st0" />
+                    <path id="Room 25" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2758.61 1504.89h128v253.33h-128z" class="st0" />
+                    <path id="Room 26" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                       d=" M1258.2 1504.9h134.7v253.3h-134.7z" class="st0" />
+                    <path id="Room 27" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 1330.44h313v138.12h-313z" class="st0" />
+                    <path id="Room 28" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 1468.56h313v136.88h-313z" class="st0" />
+                    <path id="Room 29" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 1605.44h313v137.34h-313z" class="st0" />
+                    <path id="Room 30" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 1742.78h313v132.44h-313z" class="st0" />
+                    <path id="Room 31" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 1875.22h313v136.45h-313z" class="st0" />
+                    <path id="Room 32" id="Apparments" data-link="360/Balcony/Balcony_07.html d=" M3166.61
+                        2011.67h313v136h-313z" class="st0" />
+                    <path id="Room 33" id="Apparments" data-link="360/Balcony/Balcony_07.html"
+                        d="M3166.61 2147.67h313v136h-313z" class="st0" />
+                    <path id="Room 34" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 2283.67h313v135.55h-313z" class="st0" />
+                    <path id="Room 35" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 2419.22h313v133.34h-313z" class="st0" />
+                    <path id="Room 36" id="Apparments" data-link="360/Balcony/Balcony_07.html"
+                        d="M3166.61 2552.56h313v152h-313z" class="st0" />
+                    <path id="Room 37" id="Apparments" data-link="360/Balcony/Balcony_07.html
+                        d=" M3166.61 2704.56h313v150.22h-313z" class="st0" />
+                    <path id="Room 43" id="Apparments" data-link="360/Balcony/Balcony_05.html
+                        d=" M2849.58 2712.42h266v142.36h-266z" class="st0" />
+                    <path id="Room 38" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2849.58 1758.22h266v116.86h-266z" class="st0" />
+                    <path id="Room 39" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2849.58 1875.08h266v136.67h-266z" class="st0" />
+                    <path id="Room 40" id="Apparments" data-link="360/Balcony/Balcony_03.html
+                        d=" M2849.58 2011.75h266v129.33h-266z" class="st0" />
+                    <path id="Room 41" id="Apparments" data-link="360/Balcony/Balcony_05.html
+                        d=" M3115.58 2416.66v142.42h-266v-139.09z" class="st0" />
+                    <path id="Room 42" id="Apparments" data-link="360/Balcony/Balcony_05.html
+                        d=" M2849.58 2559.08h266v153.34h-266z" class="st0" /> -->
+
+                    <path id="Room" id="Apparments" data-link="360/Balcony/Balcony_10.html" d="M3051 1134.9v315.5l-94.1-.1-72.2-.1v-315.4z" class="st0" />
+                    <path id="Room 01" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1128.2 1134.9v314.9h-113.7l-153.3-314.9z" class="st0" />
+                    <path id="Room 02" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1263.8 1134.9v315h-135.6V1135z" class="st0" />
+                    <path id="Room 03" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1396.7 1134.9v315h-132.9v-315z" class="st0" />
+                    <path id="Room 04" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1532.7 1134.9V1450h-136v-315z" class="st0" />
+                    <path id="Room 05" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M1668.7 1134.9V1450h-136v-315.1z" class="st0" />
+                    <path id="Room 06" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M1806 1134.9V1450h-137.3v-315.1z" class="st0" />
+                    <path id="Room 07" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M1945.6 1134.9v315.2H1806v-315.2z" class="st0" />
+                    <path id="Room 08" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2081.1 1134.9v315.2h-135.5v-315.2z" class="st0" />
+                    <path id="Room 09" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2214.9 1134.9v315.3h-133.7V1135h133.7z" class="st0" />
+                    <path id="Room 10" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2346 1134.9v315.3h-131.1v-315.3z" class="st0" />
+                    <path id="Room 11" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2489.6 1134.9v315.4H2346V1135z" class="st0" />
+                    <path id="Room 12" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2616.2 1134.9v315.4h-126.7v-315.4z" class="st0" />
+                    <path id="Room 13" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2757.1 1134.9v315.5h-140.9V1135h140.9z" class="st0" />
+                    <path id="Room 14" id="Apparments" data-link="360/Balcony/Balcony_08.html" d="M2884.7 1134.9v315.5l-127.6-.1v-315.5z" class="st0" />
+                    <path id="Room 15" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1258.2 1504.9v253.3h-79.7l-118.2-253.3z" class="st0" />
+                    <path id="CommonArea" id="Apparments" data-link="360/CommonArea_01.html" d="M3110.8 1758.2h-224.2v-253.3h224.2s-1.7 253.3 0 253.3" class="st0" />
+                    <path id="Room 16" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1258.2 1504.9h134.7v253.3h-134.7z" class="st0" />
+                    <path id="Room 17" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1392.8 1504.9h139.1v253.3h-139.1z" class="st0" />
+                    <path id="Room 18" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1531.9 1504.9h135.6v253.3h-135.6z" class="st0" />
+                    <path id="Room 19" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M1939.5 1504.9h140.9v253.3h-140.9z" class="st0" />
+                    <path id="Room 20" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M2080.4 1504.9h134.2v253.3h-134.2z" class="st0" />
+                    <path id="Room 21" id="Apparments" data-link="360/Balcony/Balcony_02.html" d="M2214.6 1504.9h140v253.3h-140z" class="st0" />
+                    <path id="Room 22" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2354.6 1504.9h131.6v253.3h-131.6z" class="st0" />
+                    <path id="Room 23" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2486.2 1504.9h134.2v253.3h-134.2z" class="st0" />
+                    <path id="Room 24" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2620.4 1504.9h138.2v253.3h-138.2z" class="st0" />
+                    <path id="Room 25" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2758.6 1504.9h128v253.3h-128z" class="st0" />
+                    <path id="Room 26" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3479.6 1136.7v193.7h-313v-196.2c46.6.8 220.9 3.4 313 2.5" class="st0" />
+                    <path id="Room 27" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 1330.4h313v138.1h-313z" class="st0" />
+                    <path id="Room 28" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 1468.6h313v136.9h-313z" class="st0" />
+                    <path id="Room 29" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 1605.4h313v137.3h-313z" class="st0" />
+                    <path id="Room 30" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 1742.8h313v132.4h-313z" class="st0" />
+                    <path id="Room 31" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 1875.2h313v136.4h-313z" class="st0" />
+                    <path id="Room 32" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2011.7h313v136h-313z" class="st0" />
+                    <path id="Room 33" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2147.7h313v136h-313z" class="st0" />
+                    <path id="Room 34" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2283.7h313v135.6h-313z" class="st0" />
+                    <path id="Room 35" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2419.2h313v133.3h-313z" class="st0" />
+                    <path id="Room 36" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2552.6h313v152h-313z" class="st0" />
+                    <path id="Room 37" id="Apparments" data-link="360/Balcony/Balcony_07.html" d="M3166.6 2704.6h313v150.2h-313z" class="st0" />
+                    <path id="Room 43" id="Apparments" data-link="360/Balcony/Balcony_05.html" d="M2849.6 2712.4h266v142.4h-266z" class="st0" />
+                    <path id="Room 38" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2849.6 1758.2h266v116.9h-266z" class="st0" />
+                    <path id="Room 39" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2849.6 1875.1h266v136.7h-266z" class="st0" />
+                    <path id="Room 40" id="Apparments" data-link="360/Balcony/Balcony_03.html" d="M2849.6 2011.8h266v129.3h-266z" class="st0" />
+                    <path id="Room 41" id="Apparments" data-link="360/Balcony/Balcony_05.html" d="M3115.6 2416.7v142.4h-266V2420z" class="st0" />
+                    <path id="Room 42" id="Apparments" data-link="360/Balcony/Balcony_05.html" d="M2849.6 2559.1h266v153.3h-266z" class="st0" />
+                </svg>
+
+            </div>
+            <!-- <button class="touch-button button1" onclick="window.location.href='360/Bedroom.html'">
                 BedRoom
             </button>
             <button class="touch-button button2" onclick="window.location.href='360/Balcony.html'">
                 Balcony
             </button>
-            <button class="touch-button button3" onclick="window.location.href='360/CommonArea_01.html'">
+            <button class="touch-button button3" onclick="window.location.href='360/commonarea_01.html'">
                 Common Area 01
             </button>
-            <button class="touch-button button4" onclick="window.location.href='360/CommonArea_02.html'">
+            <button class="touch-button button4" onclick="window.location.href='360/commonarea_02.html'">
                 Common Area 02
-            </button>
+            </button> -->
         </div>
     </div>
 
@@ -296,8 +526,8 @@
     <nav class="jumpbar" role="navigation" aria-label="Quick jumps">
         <div class="jumpbar-inner">
             <!-- <button class="jumpchip is-accent" id="playWalkthroughBtn">🎥 Walkthrough</button> -->
-            <button class="jumpchip" onclick="location.href='./360/Kitchen.html'">Kitchen</button>
-            <button class="jumpchip is-accent" id="openEnquiry">📞 Request Call Back</button>
+            <!-- <button class="jumpchip" onclick="location.href='./360/Kitchen.html'">Kitchen</button>
+            <button class="jumpchip is-accent" id="openEnquiry">📞 Request Call Back</button> -->
 
 
             <!-- add more as you like -->
@@ -362,29 +592,19 @@
             }
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const closeCard = document.getElementById('closeCard');
-            if (!closeCard) return;
 
-            closeCard.addEventListener('click', () => {
-                const tower = sessionStorage.getItem('lastTower') || 'A';
-                const to = tower === 'B'
-                    ? './../../SubPages/Tower_B.html'
-                    : './../../SubPages/Tower_A.html';
-
-                window.location.href = to;
-            });
-        });
-    </script>
+    <script src="/JS/BackButton.js"></script>
 
 
+    <script src="./../../JS/dec7d4pmru.js"></script>
+    <script src="./../../JS/b0htmwbcmz.js"></script>
 
     <script src="./../../JS/bz021sxwxo.js"></script>
     <script src="./../../JS/3qjueo9nsm.js"></script>
     <script src="./../../JS/2a26l58eqz.js"></script>
     <script src="./../../JS/5guwuzaijb.js"></script>
     <script src="./../../JS/ky0nwmerow.js"></script>
+    <script src="./../../JS/s2dlrxbqxj.js"></script>
     <script src="./../../../JS/ekdxgbwr0o.js"></script>
 
 </body>

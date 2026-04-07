@@ -52,6 +52,17 @@
   <script src="https://cdn.jsdelivr.net/npm/panolens@0.12.0/build/panolens.min.js"></script>
 
   <!-- <script>const panoramaImage = new PANOLENS.ImagePanorama("../../../images/Apparments/1BHK/360/Dinning.jpg"); -->
+    <script>
+    function createArrowSVG() {
+      const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <polygon points="50,20 75,65 50,55 25,65" fill="white"/>
+  </svg>
+  `;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+  </script>
+
   <script>
     // 1) Define both images
     const LOW_SRC = "./../../../images/Thumbnail/Apartments/1BHK/360/CommonArea_02.webp";
@@ -140,7 +151,9 @@
 
 
     // 🔴 Hotspot 1
-    const spot1 = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
+       const ARROW_ICON = createArrowSVG();
+
+    const spot1 = new PANOLENS.Infospot(350, ARROW_ICON);
     setFromAngles(spot1, 90, -30); 
     spot1.addHoverText("CommonArea_01");
     spot1.addEventListener('click', () => {

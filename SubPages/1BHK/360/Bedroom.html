@@ -3,15 +3,214 @@
 
 <head>
 
- 
+
   <title>London Square</title>
   <link rel="stylesheet" href="./../../../wbn05d6fbh.css" />
   <link rel="stylesheet" href="./../../../JS/CSS/yp0wlolwzw.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&family=Poppins:wght@500;600&display=swap');
+
+
+
+    #ciWidget {
+      position: absolute;
+      /* bottom: 390px;
+      right: 20px; */
+      top: 5%;
+      right: 2%;
+      width: 260px;
+      font-family: 'Jost', sans-serif;
+      z-index: 10;
+    }
+
+    /* CARD */
+    #ciCard {
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* TOP */
+    .ci-top {
+      background: #2c1f0e;
+      color: white;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ci-top-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ci-breadcrumb {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: #c9a87c;
+    }
+
+    .ci-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .ci-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .ci-badge {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      height: fit-content;
+    }
+
+    /* GLASS SECTIONS */
+    .ci-sqft,
+    .ci-facing {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* SQFT */
+    .ci-sqft {
+      display: flex;
+    }
+
+    .ci-sqft-num {
+      font-size: 32px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    .ci-sqft-meta {
+      margin-left: 10px;
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* DIMS */
+    .ci-dims {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ci-dim {
+      text-align: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .ci-dim:last-child {
+      border-right: none;
+    }
+
+    .ci-dim-label {
+      font-size: 9px;
+      color: #8a7e6e;
+    }
+
+    .ci-dim-value {
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* FACING */
+    .ci-facing-title {
+      font-size: 9px;
+      color: #8a7e6e;
+    }
+
+    .ci-facing-dir {
+      font-size: 18px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #2c1f0e;
+    }
+
+    .ci-sun {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 9px;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 
 <body>
 
+  <div class="main-container">
 
+    <!-- ✅ REQUIRED FOR PANOLENS -->
+    <div class="image-container">
+
+      <!-- ✅ YOUR INFO CARD -->
+      <div id="ciWidget">
+        <div id="ciCard">
+          <div class="ci-top">
+
+            <div class="ci-top-left">
+              <div class="ci-breadcrumb">CM INFINIA · TOWER A</div>
+              <div class="ci-title">Master Bedroom</div>
+              <div class="ci-sub">Floor 20 · 3 BHK</div>
+            </div>
+
+            <div class="ci-badge">Room 1</div>
+
+          </div>
+
+          <div class="ci-sqft">
+            <div class="ci-sqft-num">214</div>
+            <div class="ci-sqft-meta">
+              <div>SQ FT</div>
+              <div>Built-up area</div>
+            </div>
+          </div>
+
+          <div class="ci-dims">
+            <div class="ci-dim">
+              <div class="ci-dim-label">LENGTH</div>
+              <div class="ci-dim-value">17 ft</div>
+            </div>
+            <div class="ci-dim">
+              <div class="ci-dim-label">WIDTH</div>
+              <div class="ci-dim-value">13 ft</div>
+            </div>
+            <div class="ci-dim">
+              <div class="ci-dim-label">HEIGHT</div>
+              <div class="ci-dim-value">10 ft</div>
+            </div>
+          </div>
+
+          <div class="ci-facing">
+            <div class="ci-facing-title">WINDOW FACING</div>
+            <div class="ci-facing-dir">East</div>
+            <div class="ci-sun">Morning Sun</div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
   <!-- <button id="waFab" class="wa-fab" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
 
     <svg class="wa-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -52,6 +251,19 @@
   <script src="https://cdn.jsdelivr.net/npm/panolens@0.12.0/build/panolens.min.js"></script>
 
   <!-- <script>const panoramaImage = new PANOLENS.ImagePanorama("../../../images/Apparments/1BHK/360/Dinning.jpg"); -->
+
+  <script>
+    function createArrowSVG() {
+      const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <polygon points="50,20 75,65 50,55 25,65" fill="white"/>
+  </svg>
+  `;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+  </script>
+
+
   <script>
     // 1) Define both images
     const LOW_SRC = "./../../../images/Thumbnail/Apartments/1BHK/360/Bedroom.webp";
@@ -136,12 +348,12 @@
 
 
 
-
-
-
     // 🔴 Hotspot 1
-    const spot1 = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
-    setFromAngles(spot1, 182, -10); 
+
+       const ARROW_ICON = createArrowSVG();
+
+    const spot1 = new PANOLENS.Infospot(350, ARROW_ICON);
+    setFromAngles(spot1, 182, -10);
     spot1.addHoverText("Balcony");
     spot1.addEventListener('click', () => {
       // keep visible for a moment
@@ -151,8 +363,8 @@
     });
 
     // 🔴 Hotspot 2
-    const spot2 = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
-setFromAngles(spot2, 45, -10);
+    const spot2 = new PANOLENS.Infospot(350, ARROW_ICON);
+    setFromAngles(spot2, 45, -10);
     spot2.addHoverText("Common Area 01");
     spot2.addEventListener('click', () => {
       // keep visible for a moment
@@ -193,6 +405,11 @@ setFromAngles(spot2, 45, -10);
       }
     });
   </script>
+
+
+
+
+
   <script src="./../../../JS/bz021sxwxo.js"></script>
   <script src="./../../../JS/3qjueo9nsm.js"></script>
   <script src="./../../../JS/2a26l58eqz.js"></script>
